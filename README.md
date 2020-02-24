@@ -1,1 +1,4 @@
-# This repository will be use to test GitHub Actions and automation.
+# ActionsTest
+
+This app will be used to test GitHub Actions and repository.
+
