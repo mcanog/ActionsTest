@@ -1,0 +1,54 @@
+# Basic workflow on GitHub 
+
+#Naming the workflow
+name: Simple Currency App CI/CD on GitHub
+
+#Defining basic even triggers -- For now just a push or pull request to master
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+
+jobs:
+  #We start the continuous integration job (building and testing) and select where the tests will be run under
+  ci:
+    runs-on: ubuntu-latest
+    # We also need to run the tests in the same container. Hence: 
+    container:
+      image: node
+    # We need to clone the repository in this container. We do not have to manually define everything however, 
+    # we can use the already official actions defined by Github in the github marketplace. We use the checkout
+    # action for this. We also setup nodejs with version 12 on this environment
+    steps:
+      - uses: actions/checkout@v1
+#      - uses: actions/setup-node@v1 --> this line is problematic because it runs things on a different container
+#        with:
+#          node-version: '12.x'
+      - name: Install & Testing
+        run: |
+          npm install
+          npm test
+  #We start the continues delivery phase by deploying on dockerhub this time (we could do it on Amazon and whatnot)
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD}}
+      - name: Build
+        run: docker build -t app .
+      - name: Tagging
+        run: |
+          docker tag app ${{ secrets.DOCKER_USER }}/app:${{ github.sha }}
+          docker tag app ${{ secrets.DOCKER_USER }}/app:latest
+      - name: push
+        run: |
+          docker push ${{ secres.DOCKER_USER }}/back:${{ github.sha}}
+          docker push ${{ secres.DOCKER_USER }}/back:latest
+

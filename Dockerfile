@@ -16,4 +16,4 @@ COPY . .
 # Binding port to docker daemon
 EXPOSE 3000
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]

@@ -16,8 +16,8 @@ window.addEventListener('load', () => {
 	const html = ratesTemplate();
 	el.html(html);*/
 
-  /*The following code uses Vanilla Router to re-route all links to a single page (since
-  this app is a single page app)*/
+  	/*The following code uses Vanilla Router to re-route all links to a single page (since
+ 	 this app is a single page app)*/
 	const router = new Router({
 		mode: 'history',
   		page404: (path) => {
@@ -30,7 +30,7 @@ window.addEventListener('load', () => {
   		},
   	});
 
-// Adding routes and handlers (and options)
+	// Adding routes and handlers (and options)
 	router.add('/', () => {
 		let html = ratesTemplate();
 		el.html(html);
@@ -68,3 +68,5 @@ window.addEventListener('load', () => {
 	  	router.navigateTo(path);
 	});
 });
+
+
