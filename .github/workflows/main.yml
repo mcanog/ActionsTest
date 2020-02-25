@@ -32,10 +32,6 @@ jobs:
         run: |
           npm install
           npm test
-      - name: fix code coverage paths
-        working-directory: ./coverage
-        run: 
-          sed -i 's/home/runner/work/ActionsTest/ActionsTest/github/workspace/g' lcov.info
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
