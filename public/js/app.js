@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
 	const lol = 1
 	if(lol>1) {
 	  alert("Unexpected Condition");
-	}
+	} 
 
 	// This is for testing purposes:
 	/*
