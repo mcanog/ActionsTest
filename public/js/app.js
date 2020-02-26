@@ -10,6 +10,10 @@ window.addEventListener('load', () => {
 	const ratesTemplate = Handlebars.compile($('#rates-template').html());
 	const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
 	const historicalTemplate = Handlebars.compile($('#historical-template').html());
+	const lol = 1
+	if(lol>1) {
+	  alert("Unexpected Condition");
+	}
 
 	// This is for testing purposes:
 	/*
