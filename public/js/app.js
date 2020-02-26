@@ -14,6 +14,7 @@ window.addEventListener('load', () => {
 	if(lol>1) {
 	  alert("Unexpected Condition");
 	}
+	
 
 	// This is for testing purposes:
 	/*
