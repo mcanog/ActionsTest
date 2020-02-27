@@ -19,7 +19,6 @@ window.addEventListener('load', () => {
 	/*
 	const html = ratesTemplate();
 	el.html(html);*/
-
   	/*The following code uses Vanilla Router to re-route all links to a single page (since
  	 this app is a single page app)*/
 	const router = new Router({
