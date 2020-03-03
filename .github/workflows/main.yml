@@ -30,7 +30,7 @@ jobs:
       - name: Set PMD
         uses: mcanog/setup-pmd@9.2
       - name: Run PMD
-        run:  mkdir pmd_report && pmd -d lib -R category/ecmascript/codestyle.xml -f xml --failOnViolation false > pmd_report/report.xml; less report.xml
+        run:  mkdir pmd_report && pmd -d lib -R category/ecmascript/codestyle.xml -f xml --failOnViolation false
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
