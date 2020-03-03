@@ -32,6 +32,11 @@ jobs:
         run: |
           npm install
           npm test
+      - name: setup java
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '13'
+          architecture: x64
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -40,7 +45,7 @@ jobs:
       - name: Setting up PMD (fix)
         uses: mcanog/setup-pmd@9.1
       - name: run-pmd
-        run: echo $HOME; ls $HOME/pmd; echo $PATH; pmd #pmd -d ./ActionsDemo/lib -R category/ecmascript/codestyle.xml -f text
+        run: echo $HOME; ls $HOME/pmd; echo $PATH #pmd -d ./ActionsDemo/lib -R category/ecmascript/codestyle.xml -f text
   #We start the continues delivery phase by deploying on dockerhub this time (we could do it on Amazon and whatnot)
   cd:
     runs-on: ubuntu-latest
