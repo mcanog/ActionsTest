@@ -1,9 +1,8 @@
 # Basic workflow on GitHub 
 
 #Naming the workflow
-name: Simple Currency App CI/CD on GitHub
+name: CI/CD Pipeline Currency App
 
-#Defining basic even triggers -- For now just a push or pull request to master
 on:
   push:
     branches:
@@ -11,34 +10,24 @@ on:
   pull_request:
     branches:
       - master
-
-
 jobs:
-  #We start the continuous integration job (building and testing) and select where the tests will be run under
   ci:
     runs-on: ubuntu-latest
-    # We also need to run the tests in the same container. Hence: 
     container:
       image: node
-    # We need to clone the repository in this container. We do not have to manually define everything however, 
-    # we can use the already official actions defined by Github in the github marketplace. We use the checkout
-    # action for this. We also setup nodejs with version 12 on this environment
     steps:
       - uses: actions/checkout@v1
-#      - uses: actions/setup-node@v1 --> this line is problematic because it runs things on a different container
-#        with:
-#          node-version: '12.x'
-      - name: Install & Testing
+      - name: Run npm install and npm test
         run: |
           npm install
           npm test
-      - name: setup java
+      - name: Setup JRE
         uses: actions/setup-java@v1
         with:
           java-version: '13.0.2'
           java-package: jre
           architecture: x64
-      - name: Setting up PMD (fix)
+      - name: Set PMD
         uses: mcanog/setup-pmd@9.2
       - name: run-pmd
         run:  pmd -d lib -R category/ecmascript/codestyle.xml -f text --failOnViolation false
@@ -48,7 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           JAVA_HOME: ''
-  #We start the continues delivery phase by deploying on dockerhub this time (we could do it on Amazon and whatnot)
   cd:
     runs-on: ubuntu-latest
     needs: ci
