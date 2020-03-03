@@ -10,15 +10,7 @@ window.addEventListener('load', () => {
 	const ratesTemplate = Handlebars.compile($('#rates-template').html());
 	const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
 	const historicalTemplate = Handlebars.compile($('#historical-template').html());
-	const lol = 1
-	if(lol>1) {
-	  alert("Unexpected Condition");
-	} 
 
-	// This is for testing purposes:
-	/*
-	const html = ratesTemplate();
-	el.html(html);*/
   	/*The following code uses Vanilla Router to re-route all links to a single page (since
  	 this app is a single page app)*/
 	const router = new Router({
@@ -34,9 +26,43 @@ window.addEventListener('load', () => {
   	});
 
 	// Adding routes and handlers (and options)
-	router.add('/', () => {
-		let html = ratesTemplate();
-		el.html(html);
+	// router.add('/', () => {
+	// 	let html = ratesTemplate();
+	// 	el.html(html);
+	// });
+
+	//ROUTING FOR RATEs
+	// Instantiate api handler
+	const api = axios.create({
+	  baseURL: 'http://localhost:3000/api',
+	  timeout: 5000,
+	});
+
+	// Display Error Banner
+	const showError = (error) => {
+	  const { title, message } = error.response.data;
+	  const html = errorTemplate({ color: 'red', title, message });
+	  el.html(html);
+	};
+
+	// Display Latest Currency Rates
+	router.add('/', async () => {
+	  // Display loader first
+	  let html = ratesTemplate();
+	  el.html(html);
+	  try {
+	    // Load Currency Rates
+	    const response = await api.get('/rates');
+	    const { base, date, rates } = response.data;
+	    // Display Rates Table
+	    html = ratesTemplate({ base, date, rates });
+	    el.html(html);
+	  } catch (error) {
+	    showError(error);
+	  } finally {
+	    // Remove loader status
+	    $('.loading').removeClass('loading');
+	  }
 	});
 
 	router.add('/exchange', () => {
