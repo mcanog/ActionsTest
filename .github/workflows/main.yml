@@ -38,8 +38,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           steps:
-      - name: Running PMD
+      - name: Setting up PMD
         uses: sfdx-actions/setup-pmd@v1
+      - name: run-pmd
         run: pmd -d ./ActionsDemo/lib -R category/ecmascript/codestyle.xml -f text
   #We start the continues delivery phase by deploying on dockerhub this time (we could do it on Amazon and whatnot)
   cd:
