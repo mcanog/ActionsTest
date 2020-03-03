@@ -39,7 +39,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           steps:
       - name: Running PMD
-      - uses: sfdx-actions/setup-pmd@v1
+        uses: sfdx-actions/setup-pmd@v1
         run: pmd -d ./ActionsDemo/lib -R category/ecmascript/codestyle.xml -f text
   #We start the continues delivery phase by deploying on dockerhub this time (we could do it on Amazon and whatnot)
   cd:
