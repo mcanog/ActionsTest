@@ -37,7 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          steps: 
+          steps:
       - name: Setting up PMD (fix)
         uses: mcanog/setup-pmd@1.0
       - name: run-pmd
