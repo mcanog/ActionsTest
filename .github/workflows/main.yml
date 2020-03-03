@@ -33,6 +33,8 @@ jobs:
         run:  mkdir pmd_report && pmd -d lib -R category/ecmascript/codestyle.xml -f xml --failOnViolation false
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: ActionsDemo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
