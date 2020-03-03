@@ -29,8 +29,8 @@ jobs:
           architecture: x64
       - name: Set PMD
         uses: mcanog/setup-pmd@9.2
-      - name: run-pmd
-        run:  pmd -d lib -R category/ecmascript/codestyle.xml -f xml --failOnViolation false
+      - name: Run PMD
+        run:  mkdir pmd_report && pmd -d lib -R category/ecmascript/codestyle.xml -f xml --failOnViolation false > pmd_report/report.xml
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
