@@ -2,7 +2,6 @@
 
 #Naming the workflow
 name: CI/CD Pipeline Currency App
-
 on:
   push:
     branches:
