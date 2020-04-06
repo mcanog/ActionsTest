@@ -1,5 +1,4 @@
 # Basic workflow on GitHub 
-
 #Naming the workflow
 name: CI/CD Pipeline Currency App
 on:
