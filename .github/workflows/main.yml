@@ -6,9 +6,11 @@ on:
   push:
     branches:
       - master
+      - sonarcloud
   pull_request:
     branches:
       - master
+      - sonarcloud
 jobs:
   ci:
     runs-on: ubuntu-latest
